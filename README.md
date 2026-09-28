@@ -38,15 +38,15 @@ Dashboard
 
 主要目標：
 
-- 分析工業設備感測器資料
-- 找出設備故障相關特徵
-- 建立機器學習故障預測模型
-- 比較不同機器學習模型
-- 分析 Precision、Recall 與 F1 Score
-- 分析不同 Threshold 對模型的影響
-- 使用 SHAP 進行 Explainable AI 分析
-- 將模型結果轉換成設備風險等級
-- 建立設備監控 Dashboard
+* 分析工業設備感測器資料
+* 找出設備故障相關特徵
+* 建立機器學習故障預測模型
+* 比較不同機器學習模型
+* 分析 Precision、Recall 與 F1 Score
+* 分析不同 Threshold 對模型的影響
+* 使用 SHAP 進行 Explainable AI 分析
+* 將模型結果轉換成設備風險等級
+* 建立設備監控 Dashboard
 
 ---
 
@@ -86,20 +86,20 @@ Dashboard
 
 目前系統使用四種主要感測器：
 
-| 感測器 | 說明 |
-|---|---|
+| 感測器         | 說明   |
+| ----------- | ---- |
 | Temperature | 設備溫度 |
-| Pressure | 設備壓力 |
-| Vibration | 機械振動 |
-| Current | 電流 |
+| Pressure    | 設備壓力 |
+| Vibration   | 機械振動 |
+| Current     | 電流   |
 
 資料另外包含：
 
-| 欄位 | 說明 |
-|---|---|
-| timestamp | 資料時間 |
-| machine_id | 設備編號 |
-| failure | 是否發生故障 |
+| 欄位         | 說明     |
+| ---------- | ------ |
+| timestamp  | 資料時間   |
+| machine_id | 設備編號   |
+| failure    | 是否發生故障 |
 
 本專案透過模擬設備隨時間逐漸劣化的狀態，建立具有時間變化的工業感測器資料。
 
@@ -113,9 +113,9 @@ Dashboard
 
 計算相鄰時間點之間的變化：
 
-- `temperature_change`
-- `vibration_change`
-- `current_change`
+* `temperature_change`
+* `vibration_change`
+* `current_change`
 
 這些特徵用來描述設備感測器數值是否正在快速變化。
 
@@ -123,9 +123,9 @@ Dashboard
 
 計算最近一段時間的平均值：
 
-- `temperature_rolling_mean`
-- `vibration_rolling_mean`
-- `current_rolling_mean`
+* `temperature_rolling_mean`
+* `vibration_rolling_mean`
+* `current_rolling_mean`
 
 透過這些特徵，模型除了可以觀察目前的感測器數值，也可以觀察設備近期的狀態。
 
@@ -161,11 +161,11 @@ Testing Data
 
 目前使用模擬工業資料進行測試，結果如下：
 
-| 模型 | Accuracy | Precision | Recall | F1 |
-|---|---:|---:|---:|---:|
-| Random Forest | 97.999% | 96.491% | 97.015% | 96.752% |
-| Gradient Boosting | 98.624% | 97.439% | 98.100% | 97.769% |
-| XGBoost | 98.083% | 96.252% | 97.558% | 96.900% |
+| 模型                | Accuracy | Precision |  Recall |      F1 |
+| ----------------- | -------: | --------: | ------: | ------: |
+| Random Forest     |  97.999% |   96.491% | 97.015% | 96.752% |
+| Gradient Boosting |  98.624% |   97.439% | 98.100% | 97.769% |
+| XGBoost           |  98.083% |   96.252% | 97.558% | 96.900% |
 
 > **注意：** 以上結果為目前模擬資料上的測試結果，不能直接代表模型在真實工業設備上的實際表現。
 
@@ -191,9 +191,9 @@ Failure Probability
 
 不同的判斷門檻會影響：
 
-- Precision
-- Recall
-- F1 Score
+* Precision
+* Recall
+* F1 Score
 
 因此本專案測試不同 Threshold，觀察不同門檻下模型表現的變化。
 
@@ -213,17 +213,15 @@ SHAP 可以用來分析：
 
 > 為什麼模型會做出這個預測？
 
-### SHAP Feature Importance
+主要包含兩種分析。
+
+### Feature Importance
 
 分析哪些特徵對模型整體預測影響較大。
 
-![SHAP Feature Importance](results/shap_feature_importance.png)
-
-### SHAP Feature Impact
+### Feature Impact
 
 分析不同特徵數值對模型預測結果的影響方向。
-
-![SHAP Feature Impact](results/shap_feature_impact.png)
 
 因此系統不只是：
 
@@ -266,12 +264,12 @@ SHAP 可以用來分析：
 
 在真實工業環境中，實際警報門檻應根據：
 
-- 歷史故障資料
-- 維修成本
-- 設備重要程度
-- 安全要求
-- 停機成本
-- 工程師與領域專家知識
+* 歷史故障資料
+* 維修成本
+* 設備重要程度
+* 安全要求
+* 停機成本
+* 工程師與領域專家知識
 
 進行設定。
 
@@ -281,18 +279,28 @@ SHAP 可以用來分析：
 
 本專案建立 Streamlit Dashboard，用於呈現設備目前狀態。
 
+### Dashboard Preview
+
+![Industrial AI Dashboard](results/dashboard.png)
+
 Dashboard 包含：
 
-- Failure Probability
-- Risk Level
-- Temperature
-- Pressure
-- Vibration
-- Current
-- 感測器趨勢
-- 最近的設備資料
+* Failure Probability
+* Risk Level
+* Temperature
+* Pressure
+* Vibration
+* Current
+* 感測器趨勢
+* 最近的設備資料
 
 啟動 Dashboard：
+
+```bash
+streamlit run app.py
+```
+
+如果 Windows 環境找不到 `streamlit` 指令，也可以使用：
 
 ```bash
 python -m streamlit run app.py
@@ -326,11 +334,10 @@ ai-industrial-data-analysis/
 │   ├── predict_risk.py
 │   └── explore_data.py
 │
-├── results/
-│   ├── shap_feature_importance.png
-│   └── shap_feature_impact.png
-│
-└── README.md
+└── results/
+    ├── dashboard.png
+    ├── shap_feature_importance.png
+    └── shap_feature_impact.png
 ```
 
 ---
@@ -339,31 +346,31 @@ ai-industrial-data-analysis/
 
 ### Programming
 
-- Python
+* Python
 
 ### Data Processing
 
-- NumPy
-- Pandas
+* NumPy
+* Pandas
 
 ### Machine Learning
 
-- Scikit-learn
-- XGBoost
+* Scikit-learn
+* XGBoost
 
 ### Explainable AI
 
-- SHAP
+* SHAP
 
 ### Visualization
 
-- Matplotlib
-- Streamlit
+* Matplotlib
+* Streamlit
 
 ### Version Control
 
-- Git
-- GitHub
+* Git
+* GitHub
 
 ---
 
@@ -423,17 +430,17 @@ python -m streamlit run app.py
 
 目前已完成：
 
-- 工業感測器資料產生
-- 時間序列資料處理
-- Feature Engineering
-- Random Forest
-- Gradient Boosting
-- XGBoost
-- 多模型效能比較
-- Threshold Analysis
-- SHAP Explainable AI
-- Failure Risk Assessment
-- Streamlit Dashboard
+* 工業感測器資料產生
+* 時間序列資料處理
+* Feature Engineering
+* Random Forest
+* Gradient Boosting
+* XGBoost
+* 多模型效能比較
+* Threshold Analysis
+* SHAP Explainable AI
+* Failure Risk Assessment
+* Streamlit Dashboard
 
 目前已建立一套從資料到應用介面的完整流程：
 
@@ -461,13 +468,13 @@ Dashboard
 
 ## Phase 1：強化 Machine Learning
 
-- 使用真實工業資料集
-- 更嚴謹的時間序列驗證
-- Anomaly Detection
-- Remaining Useful Life（RUL）預測
-- Hyperparameter Optimization
-- Cost-sensitive Learning
-- Model Monitoring
+* 使用真實工業資料集
+* 更嚴謹的時間序列驗證
+* Anomaly Detection
+* Remaining Useful Life（RUL）預測
+* Hyperparameter Optimization
+* Cost-sensitive Learning
+* Model Monitoring
 
 ## Phase 2：多設備監控
 
@@ -489,13 +496,13 @@ Machine 005 ─┘
 
 未來可以進一步整合：
 
-- 即時感測器資料
-- Database
-- 自動警報
-- 維修決策支援
-- Model Monitoring
-- Interactive Dashboard
-- API
+* 即時感測器資料
+* Database
+* 自動警報
+* 維修決策支援
+* Model Monitoring
+* Interactive Dashboard
+* API
 
 形成較完整的 Industrial AI Platform。
 
@@ -503,13 +510,13 @@ Machine 005 ─┘
 
 長期可以進一步整合：
 
-- Digital Twin
-- Industrial Robot Simulation
-- Isaac Sim
-- ROS
-- Robot Motion Analysis
-- Human-to-Robot Interaction
-- AI-driven Manufacturing
+* Digital Twin
+* Industrial Robot Simulation
+* Isaac Sim
+* ROS
+* Robot Motion Analysis
+* Human-to-Robot Interaction
+* AI-driven Manufacturing
 
 最終希望將目前的資料分析與機器學習能力，逐步延伸到智慧製造、機器人與數位孿生應用。
 
