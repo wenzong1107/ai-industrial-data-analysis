@@ -609,15 +609,3 @@ Digital Twin
         ↓
 Robotics
 ```
-
----
-
-## 作者
-
-本專案為長期 Industrial AI GitHub Portfolio Project。
-
-目標是逐步整合：
-
-**工業工程 + 人工智慧 + 機器學習 + 工業資料分析 + 機器人 + Digital Twin**
-
-建立具備實際技術深度與持續發展性的智慧製造作品集。
