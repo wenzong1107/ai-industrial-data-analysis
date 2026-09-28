@@ -297,12 +297,6 @@ Dashboard 包含：
 啟動 Dashboard：
 
 ```bash
-streamlit run app.py
-```
-
-如果 Windows 環境找不到 `streamlit` 指令，也可以使用：
-
-```bash
 python -m streamlit run app.py
 ```
 
